@@ -1,0 +1,88 @@
+# Open new/split panes with the path of the current pane.
+unbind c
+bind c new-window -c '#{pane_current_path}'
+unbind %
+bind % split-window -h -c '#{pane_current_path}'
+unbind '"'
+bind '"' split-window -v -c '#{pane_current_path}'
+
+# Resizing (mouse also works).
+unbind j
+bind -r j resize-pane -L 5
+unbind l
+bind -r l resize-pane -R 5
+unbind k
+bind -r k resize-pane -D 5
+unbind i
+bind -r i resize-pane -U 5
+
+# Status bar.
+set -g status-bg '#343d46'
+set -g status-fg white
+set -g status-left-length 40
+set -g status-left '#[fg=yellow]#S ⧉ '
+set -g status-right "#[fg=yellow]$USER@#h #[fg=magenta]%l:%M %p"
+set -g status-interval 60 # Default is 15.
+
+# Status bar theme.
+set -g status-bg 'colour235'
+# set -g message-command-fg 'colour222'
+set -g status-justify 'centre'
+set -g status-left-length '100'
+set -g status 'on'
+# set -g pane-active-border-fg 'colour154'
+# set -g message-bg 'colour238'
+set -g status-right-length '100'
+# set -g status-right-attr 'none'
+# set -g message-fg 'colour222'
+# set -g message-command-bg 'colour238'
+# set -g status-attr 'none'
+# set -g status-utf8 'on'
+# set -g pane-border-fg 'colour238'
+# set -g status-left-attr 'none'
+# setw -g window-status-fg 'colour121'
+# setw -g window-status-attr 'none'
+# setw -g window-status-activity-bg 'colour235'
+# setw -g window-status-activity-attr 'none'
+# setw -g window-status-activity-fg 'colour154'
+setw -g window-status-separator ''
+# setw -g window-status-bg 'colour235'
+set -g status-left '#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,bg=colour235] #(whoami) ♕ #(uptime  | cut -d " " -f 1,2,3) #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]'
+set -g status-right '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,bg=colour235] %r  %a  %Y #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154] #(rainbarf --battery --remaining --no-rgb) '
+setw -g window-status-format '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[default] #I  #W #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]'
+setw -g window-status-current-format '#[fg=colour235,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #I  #W  #F #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]'
+
+# Automatically renumber window numbers on closing a pane (tmux >= 1.7).
+set -g renumber-windows on
+
+# Highlight active window.
+# set -w -g window-status-current-bg red
+
+# Mouse can be used to select panes, select windows (by clicking on the status
+# bar), resize panes. For default bindings see `tmux list-keys` and `tmux
+# list-keys -t vi-copy`.
+# set -g mouse on
+
+# Slightly more useful width in "main-vertical" layout; enough room for 3-digit
+# line number gutter in Vim + 80 columns of text + 1 column breathing room
+# (default looks to be about 79).
+set -w -g main-pane-width 85
+
+set -g history-limit 1000000
+
+# Start window and pane numbering at 1, (0 is too hard to reach).
+set -g base-index 1
+set -g pane-base-index 1
+
+# Don't wait for an escape sequence after seeing C-a.
+set -s escape-time 0
+
+# Dynamically update iTerm tab and window titles.
+set -g set-titles on
+
+# But don't change tmux's own window titles.
+set -w -g automatic-rename off
+
+# Don't wrap searches; it's super confusing given tmux's reverse-ordering of
+# position info in copy mode.
+set -w -g wrap-search off
