@@ -86,3 +86,7 @@ set -w -g automatic-rename off
 # Don't wrap searches; it's super confusing given tmux's reverse-ordering of
 # position info in copy mode.
 set -w -g wrap-search off
+
+# Vi mode
+set -g status-keys vi
+set -g mode-keys vi
